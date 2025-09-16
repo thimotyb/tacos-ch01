@@ -16,7 +16,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.0.4.RELEASE</version>                    <!--2-->
+    <version>3.2.5</version>                    <!--2-->
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -25,7 +25,9 @@
         UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>
         UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
+    <selenium.version>4.19.1</selenium.version>
+    <htmlunit-driver.version>4.13.0</htmlunit-driver.version>
   </properties>
 
   <dependencies>
@@ -52,12 +54,14 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
         <scope>test</scope>
     </dependency>
 
      <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>htmlunit-driver</artifactId>
+        <version>${htmlunit-driver.version}</version>
         <scope>test</scope>
       </dependency>
   </dependencies>
@@ -67,10 +71,6 @@
       <plugin>                                               <!--4-->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <!-- Allow Spring's CGLIB proxies to access JDK internals when running on Java 17 -->
-          <jvmArguments>--add-opens java.base/java.lang=ALL-UNNAMED</jvmArguments>
-        </configuration>
       </plugin>
     </plugins>
   </build>
