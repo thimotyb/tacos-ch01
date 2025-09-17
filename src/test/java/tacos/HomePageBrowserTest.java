@@ -2,18 +2,14 @@ package tacos;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
-
-@RunWith(SpringRunner.class)
+import org.springframework.boot.test.web.server.LocalServerPort;
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 public class HomePageBrowserTest {
   
@@ -21,7 +17,7 @@ public class HomePageBrowserTest {
   private int port;
   private static HtmlUnitDriver browser;  
   
-  @BeforeClass
+  @BeforeAll
   public static void setup() {
     browser = new HtmlUnitDriver();
     
@@ -29,7 +25,7 @@ public class HomePageBrowserTest {
           .implicitlyWait(10, TimeUnit.SECONDS);
   }
   
-  @AfterClass
+  @AfterAll
   public static void teardown() {
     browser.quit();
   }
@@ -40,14 +36,14 @@ public class HomePageBrowserTest {
     browser.get(homePage);
     
     String titleText = browser.getTitle();
-    Assert.assertEquals("Taco Cloud", titleText);
+    Assertions.assertEquals("Taco Cloud", titleText);
     
-    String h1Text = browser.findElementByTagName("h1").getText();
-    Assert.assertEquals("Welcome to...", h1Text);
+    String h1Text = browser.findElement(org.openqa.selenium.By.tagName("h1")).getText();
+    Assertions.assertEquals("Welcome to...", h1Text);
     
-    String imgSrc = browser.findElementByTagName("img")
+    String imgSrc = browser.findElement(org.openqa.selenium.By.tagName("img"))
                                               .getAttribute("src");
-    Assert.assertEquals(homePage + "/images/TacoCloud.png", imgSrc);
+    Assertions.assertEquals(homePage + "/images/TacoCloud.png", imgSrc);
   }
   
   
